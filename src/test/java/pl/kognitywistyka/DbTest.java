@@ -8,50 +8,12 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import pl.kognitywistyka.model.Good;
 
 /**
  * Created by pwilkin on 07.04.2022.
  */
 public class DbTest {
-
-    public static class Good {
-        private int id;
-        private String name;
-        private double cost;
-        private int quantity;
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public double getCost() {
-            return cost;
-        }
-
-        public void setCost(double cost) {
-            this.cost = cost;
-        }
-
-        public int getQuantity() {
-            return quantity;
-        }
-
-        public void setQuantity(int quantity) {
-            this.quantity = quantity;
-        }
-    }
 
     @BeforeAll
     public static void prepareDb() {
@@ -91,8 +53,8 @@ public class DbTest {
                 st.execute("CREATE TABLE PERSON (ID INT IDENTITY, FIRST_NAME VARCHAR(255), LAST_NAME VARCHAR(255))");
                 st.execute("DROP TABLE PERSON");
             }
-        } catch (Exception e) {
-            Assertions.fail(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
